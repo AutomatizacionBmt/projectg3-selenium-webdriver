@@ -13,12 +13,13 @@ public class RedmineLoginPage extends RedmineLandingPage{
        super(driver);
    }
 
-   public void login(String userName, String password){
+   public RedmineHomePage login(String userName, String password){
+
        driver.findElement(txtUsername).sendKeys(userName);
        driver.findElement(txtPassword).sendKeys(password);
        driver.findElement(btnLogin).click();
+
+       return new RedmineHomePage(driver);
    }
-
-
 
 }
