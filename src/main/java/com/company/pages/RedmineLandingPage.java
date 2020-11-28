@@ -2,7 +2,6 @@ package com.company.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class RedmineLandingPage {
 
@@ -10,14 +9,13 @@ public class RedmineLandingPage {
 
     private By linkLogin = By.cssSelector("a.login");
 
-
     public RedmineLandingPage(WebDriver driver){
         this.driver = driver;
     }
 
-    public void clickLinkLogin(){
+    public RedmineLoginPage clickLinkLogin(){
 
         driver.findElement(linkLogin).click();
+        return new RedmineLoginPage(driver);
     }
-
 }
