@@ -25,7 +25,6 @@ public class WebRedmineLoginStepDefs {
         baseStepDefs.currentPage = redmineLoginPage;
     }
 
-
     @Cuando("Yo inicio sesion con mis credenciales usuario {string} y password {string}")
     public void yoInicioSesionConMisCredencialesUsuarioYPassword(String user, String password) {
 
@@ -33,7 +32,6 @@ public class WebRedmineLoginStepDefs {
         redmineHomePage = redmineLoginPage.login(user, password);
         baseStepDefs.currentPage = redmineHomePage;
     }
-
 
     @Entonces("Yo deberia visualizar en la pagina de inicio mi usuario {string}")
     public void yoDeberiaVisualizarEnLaPaginaDeInicioMiUsuario(String user) {
