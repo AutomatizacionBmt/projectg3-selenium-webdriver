@@ -33,4 +33,8 @@ public class BaseTest {
     public static void tearDown(){
         driver.quit();
     }
+
+    public static WebDriver getDriver(){
+        return driver;
+    }
 }
