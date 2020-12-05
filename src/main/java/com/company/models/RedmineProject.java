@@ -6,6 +6,8 @@ public class RedmineProject {
 
     private String name;
     private String description;
+    private String homePage;
+    private String isPublic;
 
 
     //constructor

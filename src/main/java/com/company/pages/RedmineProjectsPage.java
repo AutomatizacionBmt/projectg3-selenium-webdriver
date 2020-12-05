@@ -6,9 +6,14 @@ import org.openqa.selenium.WebDriver;
 
 public class RedmineProjectsPage extends RedmineLandingPage{
 
-    //Identificar todos los elementos
+    private By btnNewProject = By.xpath("//a[text()='New project']");
     private By txtNombreProyecto = By.id("project_name");
     private By txtDescripcion = By.id("project_description");
+    private By txtHomePage = By.id("project_homepage");
+    private By chbPublicProject = By.id("project_is_public");
+    private By btnCreate = By.name("commit");
+    private By lblMessage = By.id("flash_notice");
+
 
 
     public RedmineProjectsPage(WebDriver driver){
