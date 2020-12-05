@@ -45,6 +45,7 @@ public class RedmineProjectsPage extends RedmineLandingPage{
 
     public String getUIMessage(){
 
+        //Explicit Wait
         WebDriverWait wait = new WebDriverWait(driver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(lblMessage));
 
