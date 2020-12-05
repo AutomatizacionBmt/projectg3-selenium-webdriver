@@ -18,7 +18,6 @@ public class RedmineProjectsPage extends RedmineLandingPage{
     private By lblMessage = By.id("flash_notice");
 
 
-
     public RedmineProjectsPage(WebDriver driver){
         super(driver);
     }
