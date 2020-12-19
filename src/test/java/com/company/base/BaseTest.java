@@ -10,6 +10,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +25,22 @@ public class BaseTest {
     @BeforeClass
     public static void setUpAndLaunchApp() {
 
-        System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriver");
-        driver = new ChromeDriver();
+        String browserName = System.getenv("browserName");
+        browserName = (browserName == null) ? "chrome" : browserName.toLowerCase();
+
+        switch (browserName) {
+            case "firefox":
+                setFirefoxDriverProperty();
+                break;
+            case "chrome":
+                setChromeDriverProperty();
+                break;
+            case "safari":
+                setSafariDriverProperty();
+                break;
+            default:
+                throw new IllegalStateException("The browserName " + browserName + " option is not present");
+        }
 
         //Implicit Wait
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
@@ -54,6 +70,37 @@ public class BaseTest {
             e.printStackTrace();
         }
 
+    }
+
+    private static void setChromeDriverProperty(){
+
+        if(System.getProperty("os.name").toLowerCase().contains("windows")){
+            System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriver.exe");
+        }else if(System.getProperty("os.name").toLowerCase().contains("mac")){
+            System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriver");
+        }else{
+            System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriverlinux");
+        }
+
+        driver = new ChromeDriver();
+    }
+
+    private static void setFirefoxDriverProperty(){
+
+        if(System.getProperty("os.name").toLowerCase().contains("windows")){
+            System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriver.exe");
+        }else if(System.getProperty("os.name").toLowerCase().contains("mac")){
+            System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriver");
+        }else{
+            System.setProperty("webdriver.chrome.driver", "resources/drivers/firefox/geckodriverlinux");
+        }
+
+        driver = new FirefoxDriver();
+    }
+
+    private static void setSafariDriverProperty(){
+
+        driver = new SafariDriver();
     }
 
     public static WebDriver getDriver() {
