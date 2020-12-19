@@ -23,7 +23,7 @@ public class WebRedmineProjectsStepDefs {
     public void yoRegistroUnProyecto(Map<String, String> projectData) {
 
         RedmineHomePage redmineHomePage = (RedmineHomePage) baseStepDefs.currentPage;
-        redmineProjectsPage = redmineHomePage.clickOnLink("PROJECTS");
+        redmineProjectsPage = (RedmineProjectsPage) redmineHomePage.clickOnLink("PROJECTS");
 
         String randomNumber = AppUtil.generateRandomNumber();
 

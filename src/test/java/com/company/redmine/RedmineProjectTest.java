@@ -16,7 +16,7 @@ public class RedmineProjectTest extends BaseTest {
 
         RedmineLoginPage redmineLoginPage = redmineLandingPage.clickLinkLogin();
         RedmineHomePage redmineHomePage = redmineLoginPage.login("user", "bitnami1");
-        RedmineProjectsPage redmineProjectsPage = redmineHomePage.clickOnLink("PROJECTS");
+        RedmineProjectsPage redmineProjectsPage = (RedmineProjectsPage) redmineHomePage.clickOnLink("PROJECTS");
 
         String randomNumber = AppUtil.generateRandomNumber();
 

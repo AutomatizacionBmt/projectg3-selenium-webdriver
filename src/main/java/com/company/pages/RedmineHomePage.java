@@ -22,27 +22,24 @@ public class RedmineHomePage extends RedmineLandingPage{
         return  driver.findElement(lblUserLogged).getText();
     }
 
-    public RedmineProjectsPage clickOnLink(String option) {
-
+    public RedmineLandingPage clickOnLink(String option) {
 
         switch (option.toLowerCase()) {
 
             case "my page":
                 driver.findElement(menuMyPage).click();
-                break;
+                return new RedmineLandingPage(driver);
             case "projects":
                 driver.findElement(menuMyProjects).click();
-                break;
+                return new RedmineProjectsPage(driver);
             case "administration":
                 driver.findElement(menuMyAdmin).click();
-                break;
+                return new RedmineUserPage(driver);
             case "help":
                 driver.findElement(menuHelp).click();
-                break;
+                return new RedmineLandingPage(driver);
             default:
                 throw new IllegalStateException("The option: " + option.toLowerCase() + "is not present");
         }
-
-        return new RedmineProjectsPage(driver);
     }
 }
