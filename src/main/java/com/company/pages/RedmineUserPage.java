@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class RedmineUserPage extends RedmineLandingPage{
 
     private By linkUsers = By.xpath("//a[@href='/users']");
@@ -71,5 +73,24 @@ public class RedmineUserPage extends RedmineLandingPage{
         driver.findElement(linkNewUsers).click();
     }
 
+    public Boolean userIsOnList(String userName){
+
+        //WebElement table = driver.findElement(By.tagName("table"));
+        //WebElement tbody = table.findElement(By.tagName("tbody"));
+        //List<WebElement> usuarios = tbody.findElements(By.tagName("tr"));
+
+        List<WebElement> userList =  driver.findElement(By.tagName("table"))
+                .findElement(By.tagName("tbody"))
+                .findElements(By.tagName("tr"));
+
+        for (WebElement userRow : userList){
+            //List<WebElement> listUserNames  = userRow.findElements(By.tagName("td"));
+            //WebElement userNameRow = listUserNames.get(0);
+            if(userName.equals(userRow.findElements(By.tagName("td")).get(0).getText()))
+                return true;
+        }
+
+        return false;
+    }
 
 }

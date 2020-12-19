@@ -25,3 +25,4 @@ Característica: Web UI - Redmine - Users
       | administrator | false         |
       | password      | 12345678      |
     Entonces El usuario fue registrado satisfactoriamente
+    Y el usuario deberia visualizarce en la lista de usuarios

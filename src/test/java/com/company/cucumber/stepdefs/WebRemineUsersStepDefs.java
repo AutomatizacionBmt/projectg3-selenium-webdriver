@@ -6,6 +6,7 @@ import com.company.pages.RedmineUserPage;
 import com.company.utils.AppUtil;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Entonces;
+import io.cucumber.java.es.Y;
 import org.junit.Assert;
 
 import java.util.Map;
@@ -49,13 +50,21 @@ public class WebRemineUsersStepDefs {
     @Entonces("El usuario fue registrado satisfactoriamente")
     public void elUsuarioFueRegistradoSatisfactoriamente() {
 
-        //User sadasdasda created.
-
         Assert.assertEquals("No se registró correctamente el usuario",
                 "User " + redmineUser.getUsername() + " created.",
                 redmineUserPage.getUIMessageCreateUser());
 
         System.out.println("Se registró correctamente el usuario: " + redmineUser.getUsername());
 
+    }
+
+    @Y("el usuario deberia visualizarce en la lista de usuarios")
+    public void elUsuarioDeberiaVisualizarceEnLaListaDeUsuarios() {
+
+        redmineUserPage.clickOnLinkUsers();
+        Boolean userExist = redmineUserPage.userIsOnList(redmineUser.getUsername());
+        System.out.println("¿Existe el usuario en la lista? -> " + userExist);
+
+        Assert.assertTrue(userExist);
     }
 }
