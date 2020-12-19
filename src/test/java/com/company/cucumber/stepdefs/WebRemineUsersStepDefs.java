@@ -67,4 +67,31 @@ public class WebRemineUsersStepDefs {
 
         Assert.assertTrue(userExist);
     }
+
+    @Cuando("Yo elimino el usuario de la lista de usuarios")
+    public void yoEliminoElUsuarioDeLaListaDeUsuarios() {
+
+        redmineUserPage.clickOnLinkUsers();
+        redmineUserPage.clickLinkDeleteUser(redmineUser.getUsername());
+        redmineUserPage.removeUser();
+
+    }
+
+    @Entonces("el usuario no deberia visualizarce en la lista de usuarios")
+    public void elUsuarioNoDeberiaVisualizarceEnLaListaDeUsuarios() {
+
+        redmineUserPage.clickOnLinkUsers();
+        Boolean userExist = redmineUserPage.userIsOnList(redmineUser.getUsername());
+        System.out.println("¿Existe el usuario en la lista? -> " + userExist);
+
+        Assert.assertFalse(userExist);
+    }
+
+    @Cuando("Yo no elimino el usuario de la lista de usuarios")
+    public void yoNoEliminoElUsuarioDeLaListaDeUsuarios() {
+
+        redmineUserPage.clickOnLinkUsers();
+        redmineUserPage.clickLinkDeleteUser(redmineUser.getUsername());
+        redmineUserPage.doNotRemoveUser();
+    }
 }

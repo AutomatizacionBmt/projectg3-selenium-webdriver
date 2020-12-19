@@ -27,6 +27,8 @@ public class RedmineUserPage extends RedmineLandingPage{
     private By btnCreateUser = By.name("commit");
     private By lblUIMessage = By.xpath("//*[@id=\"flash_notice\"]");
 
+    private By linkDelete = By.linkText("Delete");
+
 
     public RedmineUserPage(WebDriver driver) {
         super(driver);
@@ -93,4 +95,27 @@ public class RedmineUserPage extends RedmineLandingPage{
         return false;
     }
 
+    public void clickLinkDeleteUser(String userName){
+
+        List<WebElement> userList =  driver.findElement(By.tagName("table"))
+                .findElement(By.tagName("tbody"))
+                .findElements(By.tagName("tr"));
+
+        for (WebElement userRow : userList){
+            if(userName.equals(userRow.findElements(By.tagName("td")).get(0).getText())){
+               userRow.findElements(By.tagName("td")).get(7).findElement(linkDelete).click();
+               break;
+            }
+        }
+    }
+
+    public void removeUser(){
+        driver.switchTo().alert().accept();
+        //driver.switchTo().alert().getText();
+        //driver.switchTo().alert().sendKeys("texto");
+    }
+
+    public void doNotRemoveUser(){
+        driver.switchTo().alert().dismiss();
+    }
 }
