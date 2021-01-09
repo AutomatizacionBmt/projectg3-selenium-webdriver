@@ -92,7 +92,7 @@ public class BaseTest {
         }else if(System.getProperty("os.name").toLowerCase().contains("mac")){
             System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriver");
         }else{
-            System.setProperty("webdriver.chrome.driver", "resources/drivers/firefox/geckodriverlinux");
+            System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriverlinux");
         }
 
         driver = new FirefoxDriver();
