@@ -11,10 +11,14 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
@@ -74,33 +78,42 @@ public class BaseTest {
 
     private static void setChromeDriverProperty(){
 
-        if(System.getProperty("os.name").toLowerCase().contains("windows")){
-            System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriver.exe");
-        }else if(System.getProperty("os.name").toLowerCase().contains("mac")){
-            System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriver");
-        }else{
-            System.setProperty("webdriver.chrome.driver", "resources/drivers/chrome/chromedriverlinux");
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("chrome");
+
+        try {
+            URL hubUrl = new URL(Urls.SELENIUM_GRID);
+            driver = new RemoteWebDriver(hubUrl, capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
 
-        driver = new ChromeDriver();
     }
 
     private static void setFirefoxDriverProperty(){
 
-        if(System.getProperty("os.name").toLowerCase().contains("windows")){
-            System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriver.exe");
-        }else if(System.getProperty("os.name").toLowerCase().contains("mac")){
-            System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriver");
-        }else{
-            System.setProperty("webdriver.gecko.driver", "resources/drivers/firefox/geckodriverlinux");
-        }
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("firefox");
 
-        driver = new FirefoxDriver();
+        try {
+            URL hubUrl = new URL(Urls.SELENIUM_GRID);
+            driver = new RemoteWebDriver(hubUrl, capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     private static void setSafariDriverProperty(){
 
-        driver = new SafariDriver();
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setBrowserName("safari");
+
+        try {
+            URL hubUrl = new URL(Urls.SELENIUM_GRID);
+            driver = new RemoteWebDriver(hubUrl, capabilities);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     public static WebDriver getDriver() {
